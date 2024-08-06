@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserAPIController;
+use App\Http\Controllers\ProdukAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/login', [UserAPIController::class, 'login'])->name('public_login');
+
+//PRODUK
+Route::post('/postProduk', [ProdukAPIController::class, 'store'])->name('post_produk');
+Route::get('/getAllProduk', [ProdukAPIController::class, 'getAll'])->name('getAll_produk');
+Route::get('/getProduk/{UID_Produk}', [ProdukAPIController::class, 'index'])->name('get_produk');
+Route::post('/putProduk/{UID_Produk}', [ProdukAPIController::class, 'update'])->name('put_produk');
+Route::get('/deleteProduk/{UID_Produk}', [ProdukAPIController::class, 'delete'])->name('delete_produk');
